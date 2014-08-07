@@ -178,7 +178,7 @@ Notice that one can refer to ```that._node``` from within the ```$.on()``` callb
 
 ### Composed objects have a reference chain.
 
-When one object contains others, which in turn contain others, it can be very helpful when implementing a hotfix to have the ability to reference any part of the object from any other part by the following means: ```that._parent._parent._something._parent._method()```.
+When one object contains others, which in turn contain others, it can be very helpful when implementing a hotfix to have the ability to reference any part of the object from any other part by the following means: ```that._parent._parent._someThing._someMethod()```.
 
 Obviously, these references are not to be abused. If you're not creating a hotfix, do not use them to move more than one level up or down the chain from within a single method. Any need to go further should be recognized as a code smell.
 
