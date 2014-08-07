@@ -89,7 +89,7 @@ In your API, a member or method may be named: ```thing.verb```. However, if it i
 
 ### Constructors are not self-initializing.
 
-Cramming initialization logic into the constructor itself reduces the flexibility of the code by eliminating the possibility of re-initializing the object while maintaining data and context not affected by the initialization logic. It limits your options, in short.
+Cramming initialization logic into the constructor itself reduces flexibility by eliminating the possibility of re-initializing the object while maintaining data and context not affected by the initialization logic. It limits your options, in short.
 
 ```js
 var Thing = function () {
