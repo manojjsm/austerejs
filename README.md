@@ -67,6 +67,11 @@ There shall be one line of white space above the ```var``` keyword and above the
 
 If the need to include white space is felt, it's probably an indication that the logic above and below the white space should be in separate functions. The only exception is for hot code, where a great deal of logic has to be kept in one function to avoid incurring additional function call overhead. If a function will be called hundreds of thousands of times, ignore the white space rule.
 
+### Quotes and spaces are consistent.
+
+1. Always use single quotes for javascript. Only use double quotes when inside of single quotes.
+2. Indentation depth is exactly 2 spaces. No tab characters.
+
 ### Comments are rendered in jsDoc style.
 
 It is not important that the comments be parsable by jsDoc, since jsDoc3 still fails to read and render comments properly when the functions they explain are within closures.
