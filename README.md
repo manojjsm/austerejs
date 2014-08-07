@@ -8,7 +8,7 @@ Some of the practices endorsed here are something of a pain, but that isn't a wo
 
 ## Strict mode is used everywhere.
 
-... And if you cannot use strict mode for some reason (for example, the strictly interpreted code fails to run in a targeted browser), provide a brief justification in your comments. Otherwise, the top of every file should look like this:
+If you can't use strict mode for some reason (for example, the strictly interpreted code fails to run in a targeted browser), provide a brief justification in your comments. Otherwise, the top of every file should look like this:
 
 ```js
 "use strict";
@@ -200,7 +200,7 @@ Fallback to CommonJS modules (usually you'll want to use [Browserify](http://bro
 
 Create production builds of all javascript that will be loaded project-wide. Concatenate, minify and mangle (=uglify). Page-specific files should be minified and mangled as well.
 
-Use Grunt to do this quickly from the command line.
+Use [Grunt](http://gruntjs.com/) to do this quickly from the command line. (It's easy to learn.)
 
 ## Switch statements are not used.
 
