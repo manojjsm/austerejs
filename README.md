@@ -18,6 +18,10 @@ Some of the practices endorsed here are something of a pain, but that isn't a wo
 
 ## Functions, variables, comments
 
+### Variables are named for readability.
+
+Name every variable with the shortest possible unnabbreviated, grammatically sensible phrase that suits its value. So ```headerOffset``` is good, while ```distance``` is bad if you're storing the distance of the header from the top of its container, for example.
+
 ### Variable declarations are comma-first.
 
 With the sole caveat that variables containing functions should be declared with a separate `var` statement.
@@ -35,9 +39,9 @@ var verb = function () {
 
 ##### Q: Why comma-first? After all, it's ugly.
 
-A: It prevents a missed comma from causing the accidental declaration of global variables, which can cause troubles that are a challenge to debug. (If you forget a comma, javascript will insert a semicolon, and then your remaining vars are just ignored; in your code, you'll use those ignored vars and they'll be globals. It happens.)
+A: It prevents a missed comma from causing the accidental declaration of global variables, which can cause troubles that are a challenge to debug. (If you forget a comma, javascript will insert a semicolon, and then your remaining vars are just ignored; in your code, you'll use those ignored vars and they'll be globals.)
 
-Q: Why not multi-var then? A: To enforce the declaration of everything at the top of the function, in keeping with javascript hoisting.
+Q: Why not multi-var then? A: To enforce the declaration of everything at the top of the function, in keeping with javascript's hoisting.
 
 ### Variable declaration and initialization are separate.
 
@@ -56,6 +60,12 @@ var verb = function () {
   
 };
 ```
+
+### White space is consistent.
+
+There shall be one line of white space above the ```var``` keyword and above the comment block, plus one line of white space below the end of the ```var``` statement and below the comment block. Blank lines are not permitted elsewhere within a function block.
+
+If the need to include white space is felt, it's probably an indication that the logic above and below the white space should be in separate functions. The only exception is for hot code, where a great deal of logic has to be kept in one function to avoid incurring additional function call overhead. If a function will be called hundreds of thousands of times, ignore the white space rule.
 
 ### Comments are rendered in jsDoc style.
 
@@ -89,7 +99,7 @@ In your API, a member or method may be named: ```thing.verb```. However, if it i
 
 ### Constructors are not self-initializing.
 
-Cramming initialization logic into the constructor itself reduces flexibility by eliminating the possibility of re-initializing the object while maintaining data and context not affected by the initialization logic. It limits your options, in short.
+Including initialization logic (any logic, in fact) within the constructor body reduces flexibility by eliminating the possibility of re-running that logic while maintaining state that isn't affected by said logic. That's an unnecessary limitation.
 
 ```js
 var Thing = function () {
@@ -165,3 +175,25 @@ Thing.prototype = function () {
 ```
 
 Notice that one can refer to ```that._node``` from within the ```$.on()``` callback function's scope; this makes for a pleasant consistency.
+
+### Composed objects have a reference chain.
+
+When one object contains others, which in turn contain others, it can be very helpful when implementing a hotfix to have the ability to reference any part of the object from any other part by the following means: ```that._parent._parent._something._parent._method()```.
+
+Obviously, these references are not to be abused. If you're not creating a hotfix, do not use them to move more than one level up or down the chain from within a single method. Any need to go further should be recognized as a code smell.
+
+## Code is well-organized.
+
+In Node, you have no choice but to use the CommonJS module standard. Keep your files relatively small, containing components that make sense as individual modules. Module granularity has no lower limit (as scope decreases, reusability increases in corresponding degree).
+
+In the browser, [RequireJS](http://requirejs.org/) modules are the preferred solution, as dependency injection completely removes the puzzle of when to load which scripts, while keeping things asynchronous. So use RequireJS where suitable (but it's not always suitable, *e.g.,* when using Angular).
+
+Fallback to CommonJS modules (usually you'll want to use [Browserify](http://browserify.org)). If that won't do, fallback to modules defined within a simple object literal to avoid using globals, but don't make this a common practice.
+
+## Code is prepared for production.
+
+Create production builds of all javascript that will be loaded project-wide. Concatenate, minify and mangle (=uglify). Page-specific files should be minified and mangled as well.
+
+Use Grunt to do this quickly from the command line.
+
+## Don't use switch statements.
