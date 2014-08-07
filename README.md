@@ -192,7 +192,27 @@ To implement this consistently, always make the first argument of the ```.init()
 
 In Node, you have no choice but to use the CommonJS module standard. Keep your files relatively small, containing components that make sense as individual modules. Module granularity has no lower limit (as scope decreases, reusability increases in corresponding degree).
 
+```js
+var verb = function () {
+  // all your code
+}
+
+module.exports = verb;
+```
+
 In the browser, [RequireJS](http://requirejs.org/) modules are the preferred solution, as dependency injection completely removes the puzzle of when to load which scripts, while keeping things asynchronous. So use RequireJS where suitable (but it's not always suitable, *e.g.,* when using Angular).
+
+```js
+define("moduleName", ["jquery", "tweenLite"], function ($, TweenLite) {
+  
+  // The module internals
+  
+  return {
+    // The module API/facade.
+  }
+});
+
+```
 
 Fallback to CommonJS modules (usually you'll want to use [Browserify](http://browserify.org)). If that won't do, fallback to modules defined within a simple object literal to avoid using globals, but don't make this a common practice.
 
