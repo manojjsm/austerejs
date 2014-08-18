@@ -222,6 +222,7 @@ Obviously, these references are not to be abused. If you're not creating a hotfi
 To implement this consistently, always make the first argument of the ```.init()``` method a reference to the parent object, and store it in a member called ".parent".
 
 ## Code is well-organized.
+### Node.js and CommonJS
 
 In Node, you have no choice but to use the CommonJS module standard. Keep your files relatively small, containing components that make sense as individual modules. Module granularity has no lower limit (as scope decreases, reusability increases in corresponding degree).
 
@@ -233,7 +234,9 @@ var verb = function () {
 module.exports = verb;
 ```
 
-In the browser, [RequireJS](http://requirejs.org/) modules are the preferred solution, as dependency injection completely removes the puzzle of when to load which scripts, while keeping things asynchronous. So use RequireJS where suitable (but it's not always suitable, *e.g.,* when using Angular).
+### AMD is preferred in the browser.
+
+In the browser, asynchronous module definition (AMD) is the preferred solution, as dependency injection completely removes the puzzle of when to load which scripts, while keeping things asynchronous. So use [RequireJS](http://requirejs.org/) where suitable (but it's not always suitable, *e.g.,* when using Angular).
 
 ```js
 define("moduleName", ["jquery", "tweenLite"], function ($, TweenLite) {
@@ -251,10 +254,8 @@ Fallback to CommonJS modules (usually you'll want to use [Browserify](http://bro
 
 ## Code is prepared for production.
 
-Create production builds of all javascript that will be loaded project-wide. Concatenate, minify and mangle (=uglify). Page-specific files should be minified and mangled as well.
-
-Use [Grunt](http://gruntjs.com/) to do this quickly from the command line. (It's easy to learn.)
+Create production builds of all javascript that will be loaded project-wide. Concatenate, minify and mangle (=uglify). Page-specific files should be minified and mangled as well. Use [Grunt](http://gruntjs.com/) to do this from the command line.
 
 ## Switch statements are not used.
 
-Fall-through occasionally leads to conditions that are difficult to anticipate and think through (Crockford feels the same way).
+Fall-through occasionally leads to conditions that are difficult to anticipate and think through.
