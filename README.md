@@ -120,7 +120,7 @@ var verb = function (str, obj) {
 
 ### Function declarations are safe.
 
-Functions declarations store an anonymous function in a variable, as follows:
+Function declarations always store an anonymous function in a variable, as follows:
 
 ```js
 var verb = function (arg) {
