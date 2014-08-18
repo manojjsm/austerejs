@@ -29,7 +29,7 @@ var verb = function () {
     , result
     , temp;
   
-  ...
+  // ...
 };
 ```
 
@@ -51,9 +51,7 @@ var verb = function () {
   result = [];
   temp = [];
   counter = 0;
-   
-  ...
-  
+  // ...
 };
 ```
 
@@ -72,8 +70,7 @@ var verb = function (arg) {
   var thing
     , otherThing;
   
-  thing = arg;
-  return thing;
+  // ...
 };
 
 ```
@@ -89,12 +86,12 @@ If the need to include white space is felt, it's probably an indication that the
 ```js
 // Yes.
 var verb = function (arg) {
-  ...
+  // ...
 };
 
 // No.
 var verb = function ( arg ) {
-  ...
+  // ...
 };
 ```
 
@@ -117,8 +114,7 @@ var verb = function (str, obj) {
    * @todo ... (optional)
    */
    
-   ...
-
+   // ...
 };
 ```
 
@@ -127,10 +123,8 @@ var verb = function (str, obj) {
 Functions declarations store an anonymous function in a variable, as follows:
 
 ```js
-var verb = function(arg) {
-  
-  ...
-  
+var verb = function (arg) {
+  // ...
 };
 ```
 
@@ -188,9 +182,9 @@ Thing.prototype = function () {
     return that;
   }
 };
-
 ```
-*All* member variables that are to be referenced are set to ```null``` in the function block of the constructor. An ```init``` method should be defined to assign values to these and invoke other methods to decorate the object. The ```init``` method should not be invoked from within the constructor, but from client code, as follows:
+
+*All* member variables that are to be referenced are set to ```null``` in the function block of the constructor. An ```init()``` method should be defined to assign values to these and invoke other methods to decorate the object. The ```init()``` method should not be invoked from within the constructor, but from client code, as follows:
 
 ```js
 new Thing().init(parent, node);
@@ -237,7 +231,7 @@ Notice that one can refer to ```that._node``` from within the ```$.on()``` callb
 
 ##### Why not create bound functions instead of aliasing?
 
-Some developers recommend creating [bound functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind) to prevent ```this``` from referring to an unexpected value. In general this is great, but it's unsupported in <IE10 and only gained support on Android browser with Android 4.0. While doing this on the server (Node/Rhino/TeaJS) is fine, the polyfill for the ```.bind()``` method is not simple, and since the aliasing solution works well in general, it is preferred.
+Some developers recommend creating [bound functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind) to prevent ```this``` from referring to an unexpected value. In general this is great, but it's unsupported in IE10 and only gained support on Android browser with Android 4.0. While doing this on the server (Node/Rhino/TeaJS) is fine, the polyfill for the ```.bind()``` method is not simple, and since the aliasing solution works well in general, it is preferred.
 
 ### Composed objects have a reference chain.
 
@@ -254,7 +248,7 @@ In Node, you have no choice but to use the CommonJS module standard. Keep your f
 
 ```js
 var verb = function () {
-  // all your code
+  // ...
 }
 
 module.exports = verb;
@@ -267,10 +261,10 @@ In the browser, asynchronous module definition (AMD) is the preferred solution, 
 ```js
 define('moduleName', ['jquery', 'tweenLite'], function ($, TweenLite) {
   
-  // The module internals
+  // ...
   
   return {
-    // The module API/facade.
+    // ...
   }
 });
 
