@@ -259,15 +259,14 @@ module.exports = verb;
 In the browser, asynchronous module definition (AMD) is the preferred solution, as dependency injection completely removes the puzzle of when to load which scripts, while keeping things asynchronous. So use [RequireJS](http://requirejs.org/) where suitable (but it's not always suitable, *e.g.,* when using Angular).
 
 ```js
+// Async module definition with RequireJS
 define('moduleName', ['jquery', 'tweenLite'], function ($, TweenLite) {
   
   // ...
-  
   return {
     // ...
   }
 });
-
 ```
 
 Fallback to CommonJS modules (usually you'll want to use [Browserify](http://browserify.org)). If that won't do, fallback to modules defined within a simple object literal to avoid using globals, but don't make this a common practice.
