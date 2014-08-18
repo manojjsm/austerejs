@@ -7,7 +7,7 @@ A rigorous and opinionated style guide.
 If you can't use strict mode for some reason (for example, the strictly interpreted code fails to run in a targeted browser), provide a brief justification in your comments. Otherwise, the top of every file should look like this:
 
 ```js
-"use strict";
+'use strict';
 
 // The rest of your file.
 ```
@@ -84,6 +84,19 @@ If the need to include white space is felt, it's probably an indication that the
 
 1. Always use single quotes for javascript. Only use double quotes when inside of single quotes.
 2. Indentation depth is exactly 2 spaces. No tab characters.
+3. No space between parens and arguments. That is:
+
+```js
+// Yes.
+var verb = function (arg) {
+  ...
+};
+
+// No.
+var verb = function ( arg ) {
+  ...
+};
+```
 
 ### Comments are rendered in jsDoc style.
 
@@ -188,7 +201,7 @@ new Thing().init(parent, node);
 Whenever possible, an API function should return a reference to the object on which the API calls generally execute. For example, if ```new Dog.init()``` is invoked, since the ```init``` method is public, it should return a reference to the ```Dog``` object. That way, other public methods can be chained to ```init()``` calls, resulting in terse *but highly readable* client code like this: 
 
 ```js
-new Dog().init("pug").bark();
+new Dog().init('pug').bark();
 ```
 
 ### ```this``` always equals ```that```.
@@ -212,7 +225,7 @@ Thing.prototype = function () {
     that = this;
     that._parent = parent;
     that._node = node;
-    $(that._node).on("touchstart", function () {
+    $(that._node).on('touchstart', function () {
       that._node.empty();
     });
     return that;
@@ -252,7 +265,7 @@ module.exports = verb;
 In the browser, asynchronous module definition (AMD) is the preferred solution, as dependency injection completely removes the puzzle of when to load which scripts, while keeping things asynchronous. So use [RequireJS](http://requirejs.org/) where suitable (but it's not always suitable, *e.g.,* when using Angular).
 
 ```js
-define("moduleName", ["jquery", "tweenLite"], function ($, TweenLite) {
+define('moduleName', ['jquery', 'tweenLite'], function ($, TweenLite) {
   
   // The module internals
   
