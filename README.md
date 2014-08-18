@@ -16,7 +16,7 @@ If you can't use strict mode for some reason (for example, the strictly interpre
 // The rest of your file.
 ```
 
-## Functions, variables, comments
+## Variables, functions, and comments
 
 ### Variables are named for readability.
 
@@ -96,7 +96,31 @@ var verb = function (str, obj) {
 };
 ```
 
+### Function declarations are safe.
+
+Functions declarations store an anonymous function in a variable, as follows:
+
+```js
+var verb = function(arg) {
+  
+  ...
+  
+};
+```
+
+This style is widely regarded as preferred since it makes for easy debugging and allows for easy constructor name checking.
+
 ## Objects, methods, and members
+### Reference preservation is preferred.
+#### Arrays are modified in-place.
+
+In most cases, when modifying a javascript array, the developer's first instinct is loop the array and construct a new one, and then replace the old with the new by reassigning the variable containing the array. If the array is being accessed by a variety of parts of the software, repeated reassignment will eventually create broken references and memory leaks that are a bear to debug.
+
+So, when removing or adding items to an array, use ```Array.prototype.splice()``` if possible. It's usually possible. ([MDN docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice)).
+
+#### Objects are modified in-place.
+
+As with arrays, the loop-and-replace method is the common one. Always prefer modification using the ```delete``` directive and/or new key-value assingment. Unlike array modification, object modification in javascript is quite well-behaved.
 
 ### Non-public members and methods are underscore-prefixed.
 
@@ -127,6 +151,7 @@ Thing.prototype = function () {
      * Initializes a Thing object.
      * @param {object}
      * @param {object} A DOM node
+     * @return {Thing}
      */
     
     var that;
@@ -134,6 +159,7 @@ Thing.prototype = function () {
     that = this;
     that._parent = parent;
     that._node = node;
+    return that;
   }
 };
 
@@ -165,6 +191,7 @@ Thing.prototype = function () {
      * Initializes a Thing object.
      * @param {object}
      * @param {object} A DOM node
+     * @return {Thing}
      */
     
     var that;
@@ -175,6 +202,7 @@ Thing.prototype = function () {
     $(that._node).on("touchstart", function () {
       that._node.empty();
     });
+    return that;
   }
 };
 ```
