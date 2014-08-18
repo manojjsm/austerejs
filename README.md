@@ -1,10 +1,6 @@
 #Austere Javascript
 
-A rigorous style guide for javascript.
-
-## Prefatory Comment
-
-Some of the practices endorsed here are something of a pain, but that isn't a worthy objection if we're concerned about producing moderately large, complex, and reasonably maintainable codebases.
+A rigorous and opinionated style guide.
 
 ## Strict mode is used everywhere.
 
@@ -64,6 +60,23 @@ var verb = function () {
 ### White space is consistent.
 
 There shall be one line of white space above the ```var``` keyword and above the comment block, plus one line of white space below the end of the ```var``` statement and below the comment block. Blank lines are not permitted elsewhere within a function block.
+
+```javascript
+
+var verb = function (arg) {
+
+  /**
+   * [comment block]
+   */
+
+  var thing
+    , otherThing;
+  
+  thing = arg;
+  return thing;
+};
+
+```
 
 If the need to include white space is felt, it's probably an indication that the logic above and below the white space should be in separate functions. The only exception is for hot code, where a great deal of logic has to be kept in one function to avoid incurring additional function call overhead. If a function will be called hundreds of thousands of times, ignore the white space rule.
 
