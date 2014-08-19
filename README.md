@@ -204,7 +204,7 @@ Do not use the ```this``` keyword to reference the parent object from its method
 
 ```js
 Thing.prototype = function () {
-  init: function (parent, node) {
+  init: function (parent, jqNode) {
     
     /**
      * @method
@@ -218,8 +218,8 @@ Thing.prototype = function () {
     
     that = this;
     that._parent = parent;
-    that._node = node;
-    $(that._node).on('touchstart', function () {
+    that._node = jqNode;
+    that._node.on('touchstart', function () {
       that._node.empty();
     });
     return that;
