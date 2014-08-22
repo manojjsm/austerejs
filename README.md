@@ -11,6 +11,12 @@ If you can't use strict mode for some reason (for example, the strictly interpre
 
 // The rest of your file.
 ```
+**Why?**
+
+1. Code that fails to run in strict mode is usually just sloppy, and may be reliant on the (awful) silent error behavior of standard ES5.
+2. ES5 code written in strict mode will be easier to convert to ES6, since you won't run into issues with ambiguous syntax or have to debug conflicts with classical OO keywords that are coming to javascript (*e.g.,* ```protected, constant, implements, private, interface,``` etc.).
+
+Do see the [MDN docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope/Strict_mode) if any of this is news.
 
 ## Variables, functions, and comments
 
