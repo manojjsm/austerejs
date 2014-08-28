@@ -166,7 +166,6 @@ var Thing = function Thing () {
 
 Thing.prototype = function () {
   constructor: Thing
-  }
 };
 ```
 
