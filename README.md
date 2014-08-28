@@ -134,8 +134,6 @@ var verb = function (arg) {
 };
 ```
 
-This style is widely regarded as preferred since it makes for easy debugging and allows for easy constructor name checking.
-
 ## Objects, methods, and members
 ### Reference preservation is preferred.
 #### Arrays are modified in-place.
@@ -152,12 +150,40 @@ As with arrays, the loop-and-replace method is the common one. Always prefer mod
 
 In your API, a member or method may be named: ```thing.verb```. However, if it is not part of the API, it should be referenced as ```thing._verb```. This indicates to a developer writing client code that she should not rely on said member or method because its value will change as the *internal* needs of the object dictate.
 
+### Constructor declarations are safe and named.
+
+Because it is often useful to be able to check the type of an object without duck typing, constructor functions are named (in addition to being safely declared). This allows for easy examination of ```constructor.name``` if the constructor property is defined on the object's prototype chain.
+
+```js
+var Thing = function Thing () {
+  
+  /**
+   * @constructor
+   * Creates, stores, and mutates the Thing application state.
+   */
+
+};
+
+Thing.prototype = function () {
+  constructor: Thing
+  }
+};
+```
+
+Notice how little effort is required to determine the object's type:
+```js
+var thing;
+
+thing = new Thing();
+console.log(thing.constructor.name); \\ 'Thing'
+```
+
 ### Constructors are not self-initializing.
 
 Including initialization logic (any logic, in fact) within the constructor body reduces flexibility by eliminating the possibility of re-running that logic while maintaining state that isn't affected by said logic. That's an unnecessary limitation.
 
 ```js
-var Thing = function () {
+var Thing = function Thing () {
   
   /**
    * @constructor
@@ -170,6 +196,9 @@ var Thing = function () {
 };
 
 Thing.prototype = function () {
+  
+  constructor: Thing,
+  
   init: function (parent, node) {
     
     /**
@@ -209,7 +238,10 @@ new Dog().init('pug').bark();
 Do not use the ```this``` keyword to reference the parent object from its methods. If inside of another function within the method (typically an anonymous callback), ```this``` won't reference the parent object any longer. Changing the means of referencing the object within each function scope is a messy, repetitive, error-prone process. Just set ```that``` equal to ```this``` at the top of every method body.
 
 ```js
-Thing.prototype = function () {
+Thing.prototype = function Thing () {
+  
+  constructor: Thing,
+  
   init: function (parent, jqNode) {
     
     /**
