@@ -174,7 +174,7 @@ Notice how little effort is required to determine the object's type:
 var thing;
 
 thing = new Thing();
-console.log(thing.constructor.name); \\ 'Thing'
+console.log(thing.constructor.name); // 'Thing'
 ```
 
 ### Constructors are not self-initializing.
