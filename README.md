@@ -278,6 +278,37 @@ Obviously, these references are not to be abused. If you're not creating a hotfi
 
 To implement this consistently, always make the first argument of the ```.init()``` method a reference to the parent object, and store it in a member called ".parent".
 
+### Dynamic objects have a ```_revive()``` method.
+
+Writing revival methods for large composed objects can be difficult, since one has to revive all the way down to the lowest dynamic object within the composition, missing none. To avoid messes, all dynamic objects have a private ```_revive()``` method of the following form:
+
+```js
+Thing.prototype._revive = function (staticObj) {
+  
+  var that,
+    , prop;
+    
+  for (prop in staticObj) {
+    if (staticObj.hasOwnProperty(prop)) {
+      if (['names', 'of', 'dynamic', 'descendants'].indexOf(prop) !== -1) {
+        that[prop] = new Dynamic().init()._revive(staticObj[prop]);
+      } else {
+        that[prop] = staticObj[prop];
+      }
+    }
+  }
+};
+
+```
+
+Let's unpack that. The idea is that you create a new Thing() object, and invoke it's ```_revive()``` method, passing in the static object which you want to revive. That looks like this:
+
+```js
+new Thing().init()._revive(staticThing);
+```
+
+Then, the ```_revive()``` method loops the ```staticThing``` (shown above), and if it encounters a property with the name of a dynamic object (specified in the array literal), it will create a new dynamic object and invoke its ```_revive()``` method, passing ```staticThing[prop]```. If one keeps to this faithfully, the result is painless recursive object revival (a considerable virtue).
+
 ## Code is well-organized.
 ### Node.js and CommonJS
 
