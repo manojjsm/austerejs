@@ -298,10 +298,9 @@ Thing.prototype._revive = function (staticObj) {
     }
   }
 };
-
 ```
 
-Let's unpack that. The idea is that you create a new Thing() object, and invoke it's ```_revive()``` method, passing in the static object which you want to revive. That looks like this:
+Let's unpack that. The idea is that you create a new ```Thing()``` object, and invoke it's ```_revive()``` method, passing in the static object which you want to revive. That looks like this:
 
 ```js
 new Thing().init()._revive(staticThing);
