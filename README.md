@@ -268,7 +268,7 @@ Notice that one can refer to ```that._node``` from within the ```$.on()``` callb
 
 ##### Why not create bound functions instead of aliasing?
 
-Some developers recommend creating [bound functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind) to prevent ```this``` from referring to an unexpected value. In general this is great, but it's unsupported in IE10 and only gained support on Android browser with Android 4.0. While doing this on the server (Node/Rhino/TeaJS) is fine, the polyfill for the ```bind()``` method is not simple, and since the aliasing solution works well in general, it is preferred.
+Some developers recommend creating [bound functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind) to prevent ```this``` from referring to an unexpected value. In general this is great, but it's unsupported in <IE10, IE Mobile, and Android browser <4.0. In server code, the ```bind()``` option will be considered licit.
 
 ### Composed objects have a reference chain.
 
