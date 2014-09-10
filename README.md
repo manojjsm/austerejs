@@ -266,10 +266,6 @@ Thing.prototype = function Thing () {
 
 Notice that one can refer to ```that._node``` from within the ```$.on()``` callback function's scope; this makes for a pleasant consistency.
 
-##### Why not create bound functions instead of aliasing?
-
-Some developers recommend creating [bound functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind) to prevent ```this``` from referring to an unexpected value. In general this is great, but it's unsupported in <IE10, IE Mobile, and Android browser <4.0. In server code, the ```bind()``` option will be considered licit.
-
 ### Composed objects have a reference chain.
 
 When one object contains others, which in turn contain others, it can be very helpful when implementing a hotfix to have the ability to reference any part of the object from any other part by the following means: ```that.parent.parent._someThing._someMethod()```.
