@@ -4,7 +4,7 @@ A rigorous and opinionated style guide.
 
 ## Strict mode is used everywhere.
 
-If you can't use strict mode for some reason (for example, the strictly interpreted code fails to run in a targeted browser), provide a brief justification in your comments. Otherwise, the top of every file should look like this:
+If you can't use strict mode for some reason, provide a brief justification in your comments. Otherwise, the top of every file should look like this:
 
 ```js
 'use strict';
@@ -13,8 +13,8 @@ If you can't use strict mode for some reason (for example, the strictly interpre
 ```
 **Why?**
 
-1. Code that fails to run in strict mode is usually just sloppy, and may be reliant on the (awful) silent error behavior of standard ES5.
-2. ES5 code written in strict mode will be easier to convert to ES6, since you won't run into issues with ambiguous syntax or have to debug conflicts with classical OO keywords that are coming to javascript (*e.g.,* ```protected, constant, implements, private, interface,``` etc.).
+1. Code that fails to run in strict mode may be reliant on the (awful) silent error behavior of standard ES5.
+2. ES5 code written in strict mode will be easier to convert to ES6, since you won't have issues with ambiguous syntax or new OO keywords that are coming to javascript (*e.g.,* ```private, protected, implements,``` etc.).
 
 Do see the [MDN docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope/Strict_mode) if any of this is news.
 
@@ -22,11 +22,9 @@ Do see the [MDN docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Re
 
 ### Variables are named for readability.
 
-Name every variable with the shortest possible unnabbreviated, grammatically sensible phrase that suits its value. So ```headerOffset``` is good, while ```distance``` is bad if you're storing the distance of the header from the top of its container, for example.
+Name every variable with the shortest possible unnabbreviated, grammatically sensible phrase that suits its value.
 
 ### Variable declarations are comma-first.
-
-With the sole caveat that variables containing functions should be declared with a separate `var` statement.
 
 ```js
 var verb = function () {
@@ -39,11 +37,7 @@ var verb = function () {
 };
 ```
 
-##### Q: Why comma-first? After all, it's ugly.
-
-A: It prevents a missed comma from causing the accidental declaration of global variables, which can cause troubles that are a challenge to debug. (If you forget a comma, javascript will insert a semicolon, and then your remaining vars are just ignored; in your code, you'll use those ignored vars and they'll be globals.)
-
-Q: Why not multi-var then? A: To enforce the declaration of everything at the top of the function, in keeping with javascript's hoisting.
+This tends to prevent accidental declaration of globals. Sole caveat: variables containing a function should have a separate `var` statement.
 
 ### Variable declaration and initialization are separate.
 
@@ -63,31 +57,28 @@ var verb = function () {
 
 ### White space is consistent.
 
-There shall be one line of white space above the ```var``` keyword and above the comment block, plus one line of white space below the end of the ```var``` statement and below the comment block. Blank lines are not permitted elsewhere within a function block.
-
-```javascript
-
-var verb = function (arg) {
-
-  /**
-   * [comment block]
-   */
-
-  var thing
-    , otherThing;
+1. One blank line above the ```var``` keyword, one above the comment block, one below the ```var``` statement, and no others within a function body.
+  ```javascript
   
-  // ...
-};
-
-```
-
-If the need to include white space is felt, it's probably an indication that the logic above and below the white space should be in separate functions. The only exception is for hot code, where a great deal of logic has to be kept in one function to avoid incurring additional function call overhead. If a function will be called hundreds of thousands of times, ignore the white space rule.
-
-### Quotes and spaces are consistent.
-
-1. Always use single quotes for javascript. Only use double quotes when inside of single quotes.
-2. Indentation depth is exactly 2 spaces. No tab characters.
+  var verb = function (arg) {
+  
+    /**
+     * [comment block]
+     */
+  
+    var thing
+      , otherThing;
+    
+    // ...
+  };
+  ```
+  Additional white space usually indicates that the logic should be in separate functions. The only exception is for hot code, where it's important to avoid incurring additional function call overhead.
+2. Indentation depth is 2 spaces. No tabs.
 3. No space between parens and arguments. That is:
+
+### Quotes are consistent.
+
+Use single quotes for javascript. Double quotes appear only within single quotes.
 
 ```js
 // Yes.
@@ -101,9 +92,7 @@ var verb = function ( arg ) {
 };
 ```
 
-### Comments are rendered in jsDoc style.
-
-It is not important that the comments be parsable by jsDoc, since jsDoc3 still fails to read and render comments properly when the functions they explain are within closures.
+### Comments are jsDoc style.
 
 Notice that comments are placed *inside* the function body, at the top. Not above the function body.
 
@@ -126,7 +115,7 @@ var verb = function (str, obj) {
 
 ### Function declarations are safe.
 
-Function declarations always store an anonymous function in a variable, as follows:
+Function declarations store an anonymous function in a variable, as follows:
 
 ```js
 var verb = function (arg) {
@@ -134,21 +123,25 @@ var verb = function (arg) {
 };
 ```
 
+## Switch statements are not used.
+
+Fall-through can lead to conditions that are difficult to anticipate.
+
 ## Objects, methods, and members
 ### Reference preservation is preferred.
 #### Arrays are modified in-place.
 
-In most cases, when modifying a javascript array, the developer's first instinct is loop the array and construct a new one, and then replace the old with the new by reassigning the variable containing the array. If the array is being accessed by a variety of parts of the software, repeated reassignment will eventually create broken references and memory leaks that are a bear to debug.
+When modifying an array, a developer's instinct is to loop the array and construct a new one, and then reassign the variable from the old to the new array. If accessed from different parts of a program, repeated reassignment of an object (Array) variable can lead to broken references and memory leaks.
 
-So, when removing or adding items to an array, use ```Array.prototype.splice()``` if possible. It's usually possible. ([MDN docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice)).
+When changing an array, use ```Array.prototype.splice()``` ([MDN docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice)).
 
 #### Objects are modified in-place.
 
-As with arrays, the loop-and-replace method is the common one. Always prefer modification using the ```delete``` directive and/or new key-value assingment. Unlike array modification, object modification in javascript is quite well-behaved.
+Modify objects with ```delete``` and key (re)assingment.
 
 ### Non-public members and methods are underscore-prefixed.
 
-In your API, a member or method may be named: ```thing.verb```. However, if it is not part of the API, it should be referenced as ```thing._verb```. This indicates to a developer writing client code that she should not rely on said member or method because its value will change as the *internal* needs of the object dictate.
+In your API, a member or method might be named ```thing.verb```. If it is not part of the API, it should be referenced as ```thing._verb```. This indicates to a developer writing client code that she should not rely on said member/method because its value will change as the *internal* needs of the object dictate.
 
 ### Constructor declarations are safe and named.
 
@@ -179,7 +172,7 @@ console.log(thing.constructor.name); // 'Thing'
 
 ### Initialization is deferred.
 
-Including initialization logic (any logic, in fact) within the constructor body reduces flexibility by eliminating the possibility of re-running that logic while maintaining state that isn't affected by said logic. That's an unnecessary limitation.
+Including logic within the constructor reduces flexibility because it will be impossible to invoke that logic again, while maintaining state that isn't directly affected by it.
 
 ```js
 var Thing = function Thing () {
@@ -218,7 +211,7 @@ Thing.prototype = function () {
 };
 ```
 
-*All* member variables that are to be referenced are set to ```null``` in the function block of the constructor. An ```init()``` method should be defined to assign values to these and invoke other methods to decorate the object. The ```init()``` method should not be invoked from within the constructor, but from client code, as follows:
+*All* member variables are set to ```null``` in the function block. An ```init()``` method should be defined to assign values to these and invoke other methods. The ```init()``` method is not invoked from within the constructor, but from client code, as follows:
 
 ```js
 new Thing().init(parent, node);
@@ -226,7 +219,7 @@ new Thing().init(parent, node);
 
 ### Public methods are chainable.
 
-Whenever possible, an API function should return a reference to the object on which the API calls generally execute. For example, if ```new Dog.init()``` is invoked, since the ```init``` method is public, it should return a reference to the ```Dog``` object. That way, other public methods can be chained to ```init()``` calls, resulting in terse *but highly readable* client code like this: 
+An API function should return a reference to the object on which it executes. For example, when ```new Dog.init()``` is invoked, ```init()``` returns a reference to the ```Dog``` object, allowing other methods to be chained to ```init()``` the call, resulting in readable client code: 
 
 ```js
 new Dog().init('pug').bark();
@@ -234,7 +227,7 @@ new Dog().init('pug').bark();
 
 ### ```this``` always equals ```that```.
 
-Do not use the ```this``` keyword to reference the parent object from its methods. If inside of another function within the method (typically an anonymous callback), ```this``` won't reference the parent object any longer. Changing the means of referencing the object within each function scope is a messy, repetitive, error-prone process. Just set ```that``` equal to ```this``` at the top of every method body.
+Do not use the ```this``` keyword to reference an object from within its methods. When inside of a function nested within the method (*e.g.,* a callback), ```this``` won't refer to the object. Aliasing the object within each function scope is an error-prone approach. Just set ```that``` equal to ```this``` at the top of every method body.
 
 ```js
 Thing.prototype = function Thing () {
@@ -264,13 +257,13 @@ Thing.prototype = function Thing () {
 };
 ```
 
-Notice that one can refer to ```that._node``` from within the ```$.on()``` callback function's scope; this makes for a pleasant consistency.
+One can now refer to ```that._node``` from within the ```$.on()``` callback scope, making for a pleasant consistency.
 
 ### Composed objects have a reference chain.
 
 When one object contains others, which in turn contain others, it can be very helpful when implementing a hotfix to have the ability to reference any part of the object from any other part by the following means: ```that.parent.parent._someThing._someMethod()```.
 
-Always make the first argument of the ```init()``` method a reference to the parent object, and store the reference in a ```.parent``` member variable. Obviously, these references are not to be abused. If you're not creating a hotfix, do not use them to move more than one level up or down the chain from within a single method. Any need to go further should be recognized as a code smell.
+Make the first argument of the ```init()``` method a reference to the parent object, and store it in a ```.parent``` member. These references are not to be abused; unless creating a hotfix, do not use them to move more than one level up the chain. Any need to go further should be recognized as a code smell.
 
 ### Dynamic objects can be revived.
 
@@ -279,7 +272,7 @@ Writing revival methods for large composed objects can be difficult, since one h
 ## Code is well-organized.
 ### Node.js and CommonJS
 
-In Node, you have no choice but to use the CommonJS module standard. Keep your files relatively small, containing components that make sense as individual modules. Module granularity has no lower limit (as scope decreases, reusability increases in corresponding degree).
+In Node, you have no choice but to use the CommonJS module standard. Keep your files small, containing minimal individual modules.
 
 ```js
 var verb = function () {
@@ -291,7 +284,7 @@ module.exports = verb;
 
 ### AMD is preferred in the browser.
 
-In the browser, asynchronous module definition (AMD) is the preferred solution, as dependency injection completely removes the puzzle of when to load which scripts, while keeping things asynchronous. So use [RequireJS](http://requirejs.org/) where suitable (but it's not always suitable, *e.g.,* when using Angular).
+In the browser, AMD is preferred. So use [RequireJS](http://requirejs.org/) where suitable (but it's not always suitable, *e.g.,* when using Angular).
 
 ```js
 // Async module definition with RequireJS
@@ -304,12 +297,8 @@ define('moduleName', ['jquery', 'tweenLite'], function ($, TweenLite) {
 });
 ```
 
-Fallback to CommonJS modules (usually you'll want to use [Browserify](http://browserify.org)). If that won't do, fallback to modules defined within a simple object literal to avoid using globals, but don't make this a common practice.
+Fallback to CommonJS modules (use [Browserify](http://browserify.org)). If that won't do, fallback to modules defined with an object literal, but don't make it a common practice.
 
 ## Code is prepared for production.
 
-Create production builds of all javascript that will be loaded project-wide. Concatenate, minify and mangle (=uglify). Page-specific files should be minified and mangled as well. Use [Grunt](http://gruntjs.com/) to do this from the command line.
-
-## Switch statements are not used.
-
-Fall-through occasionally leads to conditions that are difficult to anticipate and think through.
+Create an uglified and concatenated build of all javascript that will be loaded project-wide. Page-specific files should be uglified as well. Use Grunt or Gulp.
