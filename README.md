@@ -268,15 +268,13 @@ Notice that one can refer to ```that._node``` from within the ```$.on()``` callb
 
 ##### Why not create bound functions instead of aliasing?
 
-Some developers recommend creating [bound functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind) to prevent ```this``` from referring to an unexpected value. In general this is great, but it's unsupported in IE10 and only gained support on Android browser with Android 4.0. While doing this on the server (Node/Rhino/TeaJS) is fine, the polyfill for the ```.bind()``` method is not simple, and since the aliasing solution works well in general, it is preferred.
+Some developers recommend creating [bound functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind) to prevent ```this``` from referring to an unexpected value. In general this is great, but it's unsupported in IE10 and only gained support on Android browser with Android 4.0. While doing this on the server (Node/Rhino/TeaJS) is fine, the polyfill for the ```bind()``` method is not simple, and since the aliasing solution works well in general, it is preferred.
 
 ### Composed objects have a reference chain.
 
-When one object contains others, which in turn contain others, it can be very helpful when implementing a hotfix to have the ability to reference any part of the object from any other part by the following means: ```that._parent._parent._someThing._someMethod()```.
+When one object contains others, which in turn contain others, it can be very helpful when implementing a hotfix to have the ability to reference any part of the object from any other part by the following means: ```that.parent.parent._someThing._someMethod()```.
 
-Obviously, these references are not to be abused. If you're not creating a hotfix, do not use them to move more than one level up or down the chain from within a single method. Any need to go further should be recognized as a code smell.
-
-To implement this consistently, always make the first argument of the ```init()``` method a reference to the parent object, and store it in a member called ".parent".
+Always make the first argument of the ```init()``` method a reference to the parent object, and store the reference in a ```.parent``` member variable. Obviously, these references are not to be abused. If you're not creating a hotfix, do not use them to move more than one level up or down the chain from within a single method. Any need to go further should be recognized as a code smell.
 
 ### Dynamic objects can be revived.
 
