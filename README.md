@@ -211,7 +211,7 @@ Thing.prototype = function () {
     var that;
     
     that = this;
-    that._parent = parent;
+    that.parent = parent;
     that._node = node;
     return that;
   }
@@ -254,7 +254,7 @@ Thing.prototype = function Thing () {
     var that;
     
     that = this;
-    that._parent = parent;
+    that.parent = parent;
     that._node = jqNode;
     that._node.on('touchstart', function () {
       that._node.empty();
