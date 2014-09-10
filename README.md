@@ -276,37 +276,11 @@ When one object contains others, which in turn contain others, it can be very he
 
 Obviously, these references are not to be abused. If you're not creating a hotfix, do not use them to move more than one level up or down the chain from within a single method. Any need to go further should be recognized as a code smell.
 
-To implement this consistently, always make the first argument of the ```.init()``` method a reference to the parent object, and store it in a member called ".parent".
+To implement this consistently, always make the first argument of the ```init()``` method a reference to the parent object, and store it in a member called ".parent".
 
-### Dynamic objects have a ```_revive()``` method.
+### Dynamic objects can be revived.
 
-Writing revival methods for large composed objects can be difficult, since one has to revive all the way down to the lowest dynamic object within the composition, missing none. To avoid messes, all dynamic objects have a private ```_revive()``` method. For example:
-
-```js
-Thing.prototype._revive = function (staticObj) {
-  
-  var that,
-    , prop;
-    
-  for (prop in staticObj) {
-    if (staticObj.hasOwnProperty(prop)) {
-      if (['names', 'of', 'dynamic', 'descendants'].indexOf(prop) !== -1) {
-        that[prop] = new Dynamic().init()._revive(staticObj[prop]);
-      } else {
-        that[prop] = staticObj[prop];
-      }
-    }
-  }
-};
-```
-
-Let's unpack that. The idea is that you create a new ```Thing()``` object, and invoke it's ```_revive()``` method, passing in the static object which you want to revive. That looks like this:
-
-```js
-new Thing().init()._revive(staticThing);
-```
-
-Then, the ```_revive()``` method loops the ```staticThing``` (shown above), and if it encounters a property with the name of a dynamic object (specified in the array literal), it will create a new dynamic object and invoke its ```_revive()``` method, passing ```staticThing[prop]```.
+Writing revival methods for large composed objects can be difficult, since one has to revive each dynamic descendant, missing none. To avoid messes, all dynamic objects have a  ```revive()``` method, which can be invoked by the parent object's ```revive()``` method.
 
 ## Code is well-organized.
 ### Node.js and CommonJS
