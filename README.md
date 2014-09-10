@@ -177,7 +177,7 @@ thing = new Thing();
 console.log(thing.constructor.name); // 'Thing'
 ```
 
-### Constructors are not self-initializing.
+### Initialization is deferred.
 
 Including initialization logic (any logic, in fact) within the constructor body reduces flexibility by eliminating the possibility of re-running that logic while maintaining state that isn't affected by said logic. That's an unnecessary limitation.
 
