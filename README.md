@@ -22,11 +22,35 @@ Do see the [MDN docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Re
 
 Brackets and semicolons are required.
 
+### White space is consistent.
+
+1. One blank line above the ```var``` keyword, one above the comment block, one below the ```var``` statement, and no others within a function body.
+  ```javascript
+  
+  var verb = function (arg) {
+  
+    /**
+     * [comment block]
+     */
+  
+    var thing
+      , otherThing;
+    
+    // ...
+  };
+  ```
+  Additional white space usually indicates that the logic should be in separate functions. The only exception is for hot code, where it's important to avoid incurring additional function call overhead.
+2. Indentation depth is 2 spaces. No tabs.
+3. No space between parens and arguments.
+
+### Quotes are consistent.
+
+Use single quotes for javascript. Double quotes appear *only within* single quotes.
+
 ### Structures known to invite confusion are avoided.
 
 1. Ternary conditionals are generally dispreferred in favor of if-then branched code.
 2. Switch statements are not used, since fall-through can lead to conditions that are difficult to anticipate.
-
 
 ## Variables, functions, and comments
 
@@ -64,31 +88,6 @@ var verb = function () {
   // ...
 };
 ```
-
-### White space is consistent.
-
-1. One blank line above the ```var``` keyword, one above the comment block, one below the ```var``` statement, and no others within a function body.
-  ```javascript
-  
-  var verb = function (arg) {
-  
-    /**
-     * [comment block]
-     */
-  
-    var thing
-      , otherThing;
-    
-    // ...
-  };
-  ```
-  Additional white space usually indicates that the logic should be in separate functions. The only exception is for hot code, where it's important to avoid incurring additional function call overhead.
-2. Indentation depth is 2 spaces. No tabs.
-3. No space between parens and arguments.
-
-### Quotes are consistent.
-
-Use single quotes for javascript. Double quotes appear *only within* single quotes.
 
 ### Comments are jsDoc style.
 
