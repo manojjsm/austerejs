@@ -18,6 +18,16 @@ If you can't use strict mode for some reason, provide a brief justification in y
 
 Do see the [MDN docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope/Strict_mode) if any of this is news.
 
+## Syntax is clear and explicit.
+
+Brackets and semicolons are required.
+
+### Amiguous structures are avoided.
+
+1. Ternary conditionals are generally dispreferred in favor of if-then branched code.
+2. Switch statements are not used, since fall-through can lead to conditions that are difficult to anticipate.
+
+
 ## Variables, functions, and comments
 
 ### Variables are named for readability.
@@ -122,10 +132,6 @@ var verb = function (arg) {
   // ...
 };
 ```
-
-## Switch statements are not used.
-
-Fall-through can lead to conditions that are difficult to anticipate.
 
 ## Objects, methods, and members
 ### Reference preservation is preferred.
