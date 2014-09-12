@@ -22,7 +22,7 @@ Do see the [MDN docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Re
 
 Brackets and semicolons are required.
 
-### Amiguous structures are avoided.
+### Structures known to invite confusion are avoided.
 
 1. Ternary conditionals are generally dispreferred in favor of if-then branched code.
 2. Switch statements are not used, since fall-through can lead to conditions that are difficult to anticipate.
