@@ -84,23 +84,11 @@ var verb = function () {
   ```
   Additional white space usually indicates that the logic should be in separate functions. The only exception is for hot code, where it's important to avoid incurring additional function call overhead.
 2. Indentation depth is 2 spaces. No tabs.
-3. No space between parens and arguments. That is:
+3. No space between parens and arguments.
 
 ### Quotes are consistent.
 
-Use single quotes for javascript. Double quotes appear only within single quotes.
-
-```js
-// Yes.
-var verb = function (arg) {
-  // ...
-};
-
-// No.
-var verb = function ( arg ) {
-  // ...
-};
-```
+Use single quotes for javascript. Double quotes appear *only within* single quotes.
 
 ### Comments are jsDoc style.
 
