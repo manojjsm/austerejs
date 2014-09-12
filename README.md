@@ -265,6 +265,10 @@ When one object contains others, which in turn contain others, it can be very he
 
 Make the first argument of the ```init()``` method a reference to the parent object, and store it in a ```.parent``` member. These references are not to be abused; unless creating a hotfix, do not use them to move more than one level up the chain. Any need to go further should be recognized as a code smell.
 
+### Dynamic objects have a custom ```toString()``` method.
+
+Dynamic objects have a custom method to create a string representation of the object (for storing and reviving). In cases where ```JSON.stringify()``` is sufficient, write the ```toString()``` method as a trivial wrapper, for consistency's sake.
+
 ### Dynamic objects can be revived.
 
 Writing revival methods for large composed objects can be difficult, since one has to revive each dynamic descendant, missing none. To avoid messes, all dynamic objects have a  ```revive()``` method, which can be invoked by the parent object's ```revive()``` method.
