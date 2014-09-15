@@ -210,7 +210,7 @@ Thing.prototype = function () {
 };
 ```
 
-*All* member variables are set to ```null``` in the function block. An ```init()``` method should be defined to assign values to these and invoke other methods. The ```init()``` method is not invoked from within the constructor, but from client code, as follows:
+*All* member variables are set to ```null``` in the function block, and an ```init()``` method assigns values and invokes other methods. It is invoked only from client code (not from within the constructor), as follows:
 
 ```js
 new Thing().init(parent, node);
