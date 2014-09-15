@@ -13,6 +13,7 @@ If you can't use strict mode for some reason, provide a brief justification in y
 ```
 **Why?**
 
+1. Both ```.call()``` and ```.apply()``` behave ridiculously in non-strict code. ([MDN docs for .call()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call); see Parameters.)
 1. Code that fails to run in strict mode may be reliant on the (awful) silent error behavior of standard ES5.
 2. ES5 code written in strict mode will be easier to convert to ES6, since you won't have issues with ambiguous syntax or new OO keywords that are coming to javascript (*e.g.,* ```private, protected, implements,``` etc.).
 
@@ -20,11 +21,17 @@ Do see the [MDN docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Re
 
 ## Syntax is clear and explicit.
 
-Brackets and semicolons are required.
+**Brackets and semicolons are required.** Redundant parens are encouraged whenever including them improves readability.
 
 ### White space is consistent.
 
-1. One blank line above the ```var``` keyword, one above the comment block, one below the ```var``` statement, and no others within a function body.
+1. Include a single blank line:
+  * above the comment block,
+  * below the comment block,
+  * below the ```var``` statement,
+  * and nowhere else.
+
+  As follows:
   ```javascript
   
   var verb = function (arg) {
