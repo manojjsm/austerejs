@@ -52,7 +52,7 @@ Do see the [MDN docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Re
 
 ### Quotes are consistent.
 
-Use single quotes for javascript. Double quotes appear *only within* single quotes.
+Use single quotes; double quotes appear *only within* single quotes.
 
 ### Structures known to invite confusion are avoided.
 
