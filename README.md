@@ -26,9 +26,11 @@ Do see the [MDN docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Re
 ### White space is consistent.
 
 1. Include a single blank line:
-  * above the comment block,
-  * below the comment block,
-  * below the ```var``` statement,
+  * above a comment block,
+  * below a comment block,
+  * below a ```var``` statement,
+  * between all functions,
+  * between all method definitions in a prototype literal,
   * and nowhere else.
 
   As follows:
