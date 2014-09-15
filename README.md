@@ -56,7 +56,7 @@ Use single quotes; double quotes appear *only within* single quotes.
 
 ### Switch statements are not used.
 
-Fall-through can lead to conditions that are difficult to anticipate. For situations in where there are many cases to handle, an object of functions is defined and branched code delegates calls.
+Fall-through can lead to conditions that are difficult to anticipate. For situations in which there are many cases to handle, an object of functions is defined and branched code will delegate.
 
 ## Variables, functions, and comments
 
