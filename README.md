@@ -54,10 +54,9 @@ Do see the [MDN docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Re
 
 Use single quotes; double quotes appear *only within* single quotes.
 
-### Structures known to invite confusion are avoided.
+### Switch statements are not used.
 
-1. Ternary conditionals are generally dispreferred in favor of if-then branched code.
-2. Switch statements are not used, since fall-through can lead to conditions that are difficult to anticipate.
+Fall-through can lead to conditions that are difficult to anticipate. For situations in where there are many cases to handle, an object of functions is defined and branched code delegates calls.
 
 ## Variables, functions, and comments
 
