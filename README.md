@@ -29,8 +29,8 @@ Do see the [MDN docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Re
   * above a comment block,
   * below a comment block,
   * below a ```var``` statement,
-  * between all functions,
-  * between all method definitions in a prototype literal,
+  * below a function,
+  * below a method in a prototype literal,
   * and nowhere else.
 
   As follows:
