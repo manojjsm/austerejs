@@ -131,7 +131,7 @@ var verb = function (arg) {
 
 When modifying an array, a developer's instinct is to loop the array and construct a new one, and then reassign the variable from the old to the new array. If accessed from different parts of a program, repeated reassignment of an object (Array) variable can lead to broken references and memory leaks.
 
-When changing an array, use ```Array.prototype.splice()``` ([MDN docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice)).
+When altering an array, always make mutuator methods like ```Array.prototype.splice()``` and ```Array.prototype.sort()``` your first resort.
 
 #### Objects are modified in-place.
 
