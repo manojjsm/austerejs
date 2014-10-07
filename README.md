@@ -102,8 +102,8 @@ var verb = function () {
 /**
  * @function
  * Breif, 1-sentence description of the function here.
- * @param {string}
- * @param {object}
+ * @param {string} str
+ * @param {object} obj
  * @return {string}
  * @note ... (optional)
  * @todo ... (optional)
@@ -185,8 +185,8 @@ Thing.prototype = function () {
   /**
    * @method
    * Initializes a Thing object.
-   * @param {object}
-   * @param {object} A DOM node
+   * @param {object} parent
+   * @param {object} node - A DOM node
    * @return {Thing}
    */
   init: function (parent, node) {
@@ -227,8 +227,8 @@ Thing.prototype = function Thing () {
   /**
    * @method
    * Initializes a Thing object.
-   * @param {object}
-   * @param {object} A DOM node
+   * @param {object} parent
+   * @param {object} jqNode - A DOM node
    * @return {Thing}
    */
   init: function (parent, jqNode) {
