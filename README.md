@@ -127,7 +127,7 @@ var verb = function (arg) {
 
 When modifying an array, a developer's instinct is to loop the array and construct a new one, and then reassign the variable from the old to the new array. If accessed from different parts of a program, repeated reassignment of an object (Array) variable can lead to broken references and memory leaks.
 
-When altering an array, always make mutuator methods like ```Array.prototype.splice()``` and ```Array.prototype.sort()``` your first resort.
+When altering an array, always make mututor methods like ```Array.prototype.splice()``` and ```Array.prototype.sort()``` your first resort.
 
 #### Objects are modified in-place.
 
@@ -249,6 +249,8 @@ One can now refer to ```that._node``` from within the ```$.on()``` callback scop
 When one object contains others, which in turn contain others, it can be very helpful when implementing a hotfix to have the ability to reference any part of the object from any other part by the following means: ```that.parent.parent._someThing._someMethod()```.
 
 Make the first argument of the ```init()``` method a reference to the parent object, and store it in a ```.parent``` member. These references are not to be abused; unless creating a hotfix, do not use them to move more than one level up the chain. Any need to go further should be recognized as a code smell.
+
+Note: because this results in massive circularity, it can complicate ```toString()```/ ```revive()``` methods (see below).
 
 ### Dynamic objects have a custom ```toString()``` method.
 
