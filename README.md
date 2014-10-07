@@ -290,7 +290,7 @@ define('moduleName', ['jquery', 'tweenLite'], function ($, TweenLite) {
 });
 ```
 
-Fallback to CommonJS modules (use [Browserify](http://browserify.org)). If that won't do, fallback to modules defined with an object literal, but don't make it a common practice.
+Fallback to CommonJS modules (use [Browserify](http://browserify.org)) or define modules by passing variables to  IIFEs.
 
 ## Code is prepared for production.
 
