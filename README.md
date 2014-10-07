@@ -98,25 +98,22 @@ var verb = function () {
 ```
 
 ### Comments are jsDoc style.
-
-Notice that comments are placed *inside* the function body, at the top. Not above the function body.
-
 ```js
+/**
+ * @function
+ * Breif, 1-sentence description of the function here.
+ * @param {string}
+ * @param {object}
+ * @return {string}
+ * @note ... (optional)
+ * @todo ... (optional)
+ */
 var verb = function (str, obj) {
-
-  /**
-   * @function
-   * Breif, 1-sentence description of the function here.
-   * @param {string}
-   * @param {object}
-   * @return {string}
-   * @note ... (optional)
-   * @todo ... (optional)
-   */
-   
    // ...
 };
 ```
+
+In many cases, one may wish to document a callback function, rather than (or in addition to) the function into which it is being passed. Make use of the ```@callback``` tag to do this, rather than documenting the function inside the function body. 
 
 ### Function declarations are safe.
 
@@ -150,12 +147,7 @@ Because it is often useful to be able to check the type of an object without duc
 
 ```js
 var Thing = function Thing () {
-  
-  /**
-   * @constructor
-   * Creates, stores, and mutates the Thing application state.
-   */
-
+  // ...
 };
 
 Thing.prototype = function () {
@@ -176,13 +168,11 @@ console.log(thing.constructor.name); // 'Thing'
 Including logic within the constructor reduces flexibility because it will be impossible to invoke that logic again, while maintaining state that isn't directly affected by it.
 
 ```js
+/**
+ * @constructor
+ * Creates, stores, and mutates the Thing application state.
+ */
 var Thing = function Thing () {
-  
-  /**
-   * @constructor
-   * Creates, stores, and mutates the Thing application state.
-   */
-  
   this.parent = null;
   this._node = null;
   this._markup = null;
@@ -192,15 +182,14 @@ Thing.prototype = function () {
   
   constructor: Thing,
   
+  /**
+   * @method
+   * Initializes a Thing object.
+   * @param {object}
+   * @param {object} A DOM node
+   * @return {Thing}
+   */
   init: function (parent, node) {
-    
-    /**
-     * @method
-     * Initializes a Thing object.
-     * @param {object}
-     * @param {object} A DOM node
-     * @return {Thing}
-     */
     
     var that;
     
@@ -235,15 +224,14 @@ Thing.prototype = function Thing () {
   
   constructor: Thing,
   
+  /**
+   * @method
+   * Initializes a Thing object.
+   * @param {object}
+   * @param {object} A DOM node
+   * @return {Thing}
+   */
   init: function (parent, jqNode) {
-    
-    /**
-     * @method
-     * Initializes a Thing object.
-     * @param {object}
-     * @param {object} A DOM node
-     * @return {Thing}
-     */
     
     var that;
     
