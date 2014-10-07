@@ -294,4 +294,4 @@ Fallback to CommonJS modules (use [Browserify](http://browserify.org)) or define
 
 ## Code is prepared for production.
 
-Create an uglified and concatenated build of all javascript that will be loaded project-wide. Page-specific files should be uglified as well. Use Grunt or Gulp.
+Create an uglified and concatenated build of all javascript that will be loaded project-wide. Page-specific files should be uglified as well. (Doing this without Grunt/Gulp/Broccoli would be painful.)
