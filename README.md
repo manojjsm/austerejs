@@ -17,7 +17,7 @@ If you can't use strict mode for some reason, provide a brief justification in y
 1. Code that fails to run in strict mode may be reliant on the (awful) silent error behavior of standard ES5.
 2. ES5 code written in strict mode will be easier to convert to ES6, since you won't have issues with ambiguous syntax or new OO keywords that are coming to javascript (*e.g.,* ```private, protected, implements,``` etc.).
 
-Do see the [MDN docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope/Strict_mode) if any of this is news.
+Do see the [MDN docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope/Strict_mode) if any of this is news. And [this article](http://www.yuiblog.com/blog/2010/12/14/strict-mode-is-coming-to-town/) by Crockford is worth the read.
 
 ## Syntax is clear and explicit.
 
@@ -127,7 +127,7 @@ var verb = function (arg) {
 
 When modifying an array, a developer's instinct is to loop the array and construct a new one, and then reassign the variable from the old to the new array. If accessed from different parts of a program, repeated reassignment of an object (Array) variable can lead to broken references and memory leaks.
 
-When altering an array, always make mututor methods like ```Array.prototype.splice()``` and ```Array.prototype.sort()``` your first resort.
+When altering an array, always make mutator methods like ```Array.prototype.splice()``` and ```Array.prototype.sort()``` your first resort.
 
 #### Objects are modified in-place.
 
