@@ -32,10 +32,7 @@ Do see the [MDN docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Re
 
   As follows:
   ```javascript
-  
-  /**
-   * [comment block]
-   */
+  /** [comment block] */
   var verb = function (arg) {
   
     var thing
