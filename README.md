@@ -1,6 +1,6 @@
 #Austere Javascript
 
-A rigorous and opinionated style guide.
+A rigorous and opinionated style guide for ES5.
 
 ## Strict mode is used everywhere.
 
