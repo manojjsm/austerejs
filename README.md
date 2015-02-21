@@ -7,7 +7,7 @@ A rigorous and opinionated style guide.
 If you can't use strict mode for some reason, provide a brief justification in your comments. Otherwise, the top of every module should look like this:
 
 ```js
-var doSomething = function () {
+var moduleName = function () {
   
   'use strict';
   
