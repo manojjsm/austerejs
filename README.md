@@ -12,7 +12,7 @@ var doSomething = function () {
   'use strict';
   
   // The rest of your module.
-}
+};
 ```
 **Why?**
 
