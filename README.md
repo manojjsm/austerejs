@@ -4,12 +4,15 @@ A rigorous and opinionated style guide.
 
 ## Strict mode is used everywhere.
 
-If you can't use strict mode for some reason, provide a brief justification in your comments. Otherwise, the top of every file should look like this:
+If you can't use strict mode for some reason, provide a brief justification in your comments. Otherwise, the top of every module should look like this:
 
 ```js
-'use strict';
-
-// The rest of your file.
+var doSomething = function () {
+  
+  'use strict';
+  
+  // The rest of your module.
+}
 ```
 **Why?**
 
