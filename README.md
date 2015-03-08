@@ -93,6 +93,16 @@ var verb = function () {
 };
 ```
 
+### Function declarations are safe.
+
+Function declarations store an anonymous function in a variable, as follows:
+
+```js
+var verb = function (arg) {
+  // ...
+};
+```
+
 ### Comments are jsDoc style.
 ```js
 /**
@@ -110,16 +120,6 @@ var verb = function (str, obj) {
 ```
 
 In many cases, one may wish to document a callback function, rather than (or in addition to) the function into which it is being passed. Make use of the ```@callback``` tag to do this, rather than documenting the function inside the function body. 
-
-### Function declarations are safe.
-
-Function declarations store an anonymous function in a variable, as follows:
-
-```js
-var verb = function (arg) {
-  // ...
-};
-```
 
 ## Objects, methods, and members
 ### Reference preservation is preferred.
@@ -174,7 +174,7 @@ var Thing = function Thing () {
   this._markup = null;
 };
 
-Thing.prototype = function () {
+Thing.prototype = {
   
   constructor: Thing,
   
@@ -216,7 +216,7 @@ new Dog().init('pug').bark();
 Do not use the ```this``` keyword to reference an object from within its methods. When inside of a function nested within the method (*e.g.,* a callback), ```this``` won't refer to the object. Aliasing the object within each function scope is an error-prone approach. Just set ```that``` equal to ```this``` at the top of every method body.
 
 ```js
-Thing.prototype = function Thing () {
+Thing.prototype = {
   
   constructor: Thing,
   
